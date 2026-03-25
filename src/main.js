@@ -1,4 +1,6 @@
 import "./index.css";
+import studioLight from "./assets/Images/light.hdr";
+import carModel from "./assets/Images/2.glb";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import {
@@ -49,7 +51,7 @@ cubeWebGL.setSize(window.innerWidth, window.innerHeight);
 cubeWebGL.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 const ModelLoader = new GLTFLoader();
-ModelLoader.load("./src/assets/Images/2.glb", function (model) {
+ModelLoader.load(carModel, function (model) {
   // const box = new THREE.Box3().setFromObject(model);
   // const lowestPoint = box.min.y;
   model.scene.scale.set(150, 150, 150);
@@ -58,7 +60,7 @@ ModelLoader.load("./src/assets/Images/2.glb", function (model) {
 });
 // src\assets\Images\2.glb
 const lightLoader = new RGBELoader();
-lightLoader.load("./src/assets/Images/light.hdr", (light) => {
+lightLoader.load(studioLight, (light) => {
   light.mapping = THREE.EquirectangularRefractionMapping;
   scene.environment = light;
   scene.background = light;
