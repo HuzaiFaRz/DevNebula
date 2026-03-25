@@ -1,6 +1,6 @@
 import "./index.css";
-const carPath = "../public/assets/models/car.glb";
-const lightPath = "../public/assets/lights/studiolight.hdr";
+const carPath = "/assets/models/car.glb";
+const lightPath = "/assets/lights/studiolight.hdr";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls, RGBELoader } from "three/examples/jsm/Addons.js";
