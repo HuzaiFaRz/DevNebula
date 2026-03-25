@@ -1,13 +1,9 @@
 import "./index.css";
-import studioLight from "./assets/Images/light.hdr";
-import carModel from "./assets/Images/2.glb";
+const carPath = "../public/assets/models/car.glb";
+const lightPath = "../public/assets/lights/studiolight.hdr";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import {
-  HDRLoader,
-  OrbitControls,
-  RGBELoader,
-} from "three/examples/jsm/Addons.js";
+import { OrbitControls, RGBELoader } from "three/examples/jsm/Addons.js";
 
 const scene = new THREE.Scene();
 
@@ -51,16 +47,14 @@ cubeWebGL.setSize(window.innerWidth, window.innerHeight);
 cubeWebGL.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 const ModelLoader = new GLTFLoader();
-ModelLoader.load(carModel, function (model) {
-  // const box = new THREE.Box3().setFromObject(model);
-  // const lowestPoint = box.min.y;
+ModelLoader.load(carPath, function (model) {
   model.scene.scale.set(150, 150, 150);
   model.scene.position.y = -1;
   scene.add(model.scene);
 });
-// src\assets\Images\2.glb
+
 const lightLoader = new RGBELoader();
-lightLoader.load(studioLight, (light) => {
+lightLoader.load(lightPath, (light) => {
   light.mapping = THREE.EquirectangularRefractionMapping;
   scene.environment = light;
   scene.background = light;
