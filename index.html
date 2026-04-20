@@ -7,8 +7,99 @@
   </head>
   <body>
     <div id="app">
-      <canvas></canvas>
+      <div
+        class="w-full h-screen flex flex-col justify-between items-center text-gray-600"
+      >
+        <nav
+          class="w-full h-[13%] fixed font-Florisha bg-black perspective-[1000px] transform-3d"
+          id="Navbar"
+        >
+          <div class="w-full flex justify-between items-center px-4 py-2 z-20">
+            <div class="text-3xl">CAR X</div>
+            <button
+              class="flex flex-col items-center justify-center cursor-pointer z-100"
+              id="Navbar_Menu"
+            >
+              <i data-lucide="Ellipsis" class="size-10"></i>
+              <div class="text-xl relative inline-block overflow-hidden">
+                <span class="block">Open</span>
+                <span class="absolute left-0 top-full">Close</span>
+              </div>
+            </button>
+          </div>
+
+          <div
+            class="absolute left-0 w-1/2 h-[87%] flex flex-row justify-center items-center"
+            id="Navbar_Images"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1631295868223-63265b40d9e4?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Image-1"
+              class="w-96 h-96 object-cover object-center absolute"
+              id="Navbar_Image"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1629019879059-2a0345f93aea?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Image-2"
+              class="w-96 h-96 object-cover object-center hidden absolute"
+              id="Navbar_Image"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1627008119017-f89d9704a799?q=80&w=464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Image-3"
+              class="w-96 h-96 object-cover object-center hidden absolute"
+              id="Navbar_Image"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1651078944944-5d5507799a51?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGJtdyUyMGk3fGVufDB8fDB8fHww"
+              alt="Image-4"
+              class="w-96 h-96 object-cover object-center hidden absolute"
+              id="Navbar_Image"
+            />
+          </div>
+
+          <span class="absolute w-45 h-30 invisible" id="Navbar_Link_Smoke">
+            <span
+              class="absolute w-22.5 h-22.5 left-0 top-2 rounded-full bg-[radial-gradient(circle,rgba(255,0,150,0.9),transparent_70%)] blur-[20px]"
+            ></span>
+
+            <span
+              class="absolute w-20 h-20 left-6 top-0 rounded-full bg-[radial-gradient(circle,rgba(0,200,255,0.8),transparent_70%)] blur-[22px]"
+            ></span>
+
+            <span
+              class="absolute w-25 h-25 left-4 top-4 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.25),transparent_70%)] blur-[28px]"
+            ></span>
+          </span>
+
+          <div
+            class="absolute right-0 w-1/2 h-[87%] flex flex-col justify-center gap-10 items-start font-extrabold px-3 cursor-pointer text-7xl leading-24"
+            id="Navbar_Links"
+          >
+            <li class="flex justify-center items-center gap-5" id="Navbar_Link">
+              <span class="text-2xl">1.</span>
+              <a target="_blank" id="Navbar_Link_Text"></a>
+            </li>
+
+            <li class="flex justify-center items-center gap-5" id="Navbar_Link">
+              <span class="text-2xl">2.</span>
+              <a target="_blank" id="Navbar_Link_Text"></a>
+            </li>
+
+            <li class="flex justify-center items-center gap-5" id="Navbar_Link">
+              <span class="text-2xl">3.</span>
+              <a target="_blank" id="Navbar_Link_Text"></a>
+            </li>
+
+            <li class="flex justify-center items-center gap-5" id="Navbar_Link">
+              <span class="text-2xl">4.</span>
+              <a target="_blank" id="Navbar_Link_Text"></a>
+            </li>
+          </div>
+        </nav>
+      </div>
     </div>
     <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/Layout/Navbar.js"></script>
   </body>
 </html>

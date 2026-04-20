@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite'
-
+import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
-  // This tells Vite to treat these as binary assets, not code
-  assetsInclude: ['**/*.glb', '**/*.gltf', '**/*.hdr'],
-})
+  plugins: [tailwindcss()],
+  assetsInclude: ["**/*.glb", "**/*.gltf", "**/*.hdr"],
+});
