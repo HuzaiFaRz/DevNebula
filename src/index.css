@@ -2,20 +2,9 @@
 
 @font-face {
   font-family: Florisha;
-  src: url(/public/assets/fonts/Florisha\ -\ Bold.woff2);
+  src: url("./assets/fonts/Florisha.woff2") format("woff2");
 }
 
 @theme {
   --font-Florisha: Florisha;
-}
-
-body {
-  overflow-x: hidden !important;
-  user-select: none !important;
-  -moz-user-select: none !important;
-}
-
-.Navbar_Link_Text_Span {
-  margin-left: 5px !important;
-  display: inline-flex !important;
 }

@@ -1,9 +1,8 @@
-import React from "react";
 import Navbar from "./Navbar";
 
 const App = () => {
   return (
-    <div>
+    <div className="w-full h-dvh bg-amber-400">
       <Navbar />
     </div>
   );
