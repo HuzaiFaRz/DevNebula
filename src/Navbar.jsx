@@ -3,8 +3,10 @@ import { useGSAP } from "@gsap/react";
 import { CustomEase } from "gsap/all";
 import { HiDotsHorizontal, HiOutlineMenuAlt4 } from "react-icons/hi";
 import React, { useEffect, useRef, useState } from "react";
+import nav_Images from "./assets/images/Nav-Image-1.webp";
 
 const Navbar = () => {
+  console.log(nav_Images);
   const [isNav_O_C, setIsnav_O_C] = useState(true);
 
   // const navbar = document.getElementById("Navbar");
@@ -43,7 +45,7 @@ const Navbar = () => {
   //   ease: "power2.out",
   // });
 
-  // navbarTimeline.from("Navbar_Link_Smoke", {
+  // navbarTimeline.from("Navbar_Link_Circle", {
   //   display: "none",
   // });
 
@@ -105,6 +107,8 @@ const Navbar = () => {
   //   });
   // });
 
+  const [nav_Link_Circle_Text, setNav_Link_Circle_Text] = useState("Hey!");
+
   const navRef = useRef();
   const { contextSafe } = useGSAP({ scope: navRef });
   const navLinkRef = useRef([]);
@@ -156,12 +160,12 @@ const Navbar = () => {
       });
   });
 
-  const nav_Center_Smoke_Handler = contextSafe((event) => {
+  const nav_Center_Circle_Handler = contextSafe((event) => {
     if (!isNav_O_C) {
       return;
     }
 
-    gsap.to("#Nav_Link_Shadow", {
+    gsap.to("#Nav_Link_Circle", {
       left: `${event.clientX}px`,
       top: `${event.clientY}px`,
       duration: 0.1,
@@ -169,9 +173,26 @@ const Navbar = () => {
     });
   });
 
-  const nav_Link_Smoke_Animation = (linkNumber) => {
-    document.querySelector("#Nav_Link_Shadow").textContent = linkNumber;
+  const nav_Link_Circle_Animation = (linkNumber) => {
+    setNav_Link_Circle_Text(linkNumber);
   };
+
+  useEffect(() => {
+    const animate = contextSafe(() => {
+      gsap.fromTo(
+        "#Nav_Link_Circle",
+        {
+          scale: 1.4,
+        },
+        {
+          scale: 1,
+          duration: 0.5,
+          ease: "power3.inOut",
+        },
+      );
+    });
+    animate();
+  }, [nav_Link_Circle_Text]);
 
   return (
     <>
@@ -202,14 +223,19 @@ const Navbar = () => {
         <div
           className="bg-amber-300 w-full h-full absolute overflow-hidden"
           id="Navbar_Center"
-          onMouseMove={nav_Center_Smoke_Handler}
+          onMouseMove={nav_Center_Circle_Handler}
         >
-          <div className="absolute left-0 w-[40%] h-full bg-red-300 flex items-center justify-center">
+          <div
+            className="absolute left-0 w-[40%] h-full bg-red-300 flex items-center justify-center"
+            onMouseEnter={() => {
+              setNav_Link_Circle_Text("Hey!");
+            }}
+          >
             {Array.from({ length: 4 }, (_, i) => i + 1).map((elem, index) => {
               return (
                 <React.Fragment key={index}>
                   <img
-                    src={`src/assets/images/Nav-Image-${elem}.webp`}
+                    src={`src/assets/images/nav-image-${elem}.webp`}
                     alt={`Nav_Image_${elem}`}
                     className="w-75 object-cover object-center absolute"
                   />
@@ -217,14 +243,15 @@ const Navbar = () => {
               );
             })}
           </div>
+
           <div className="absolute right-0 w-[60%] h-full bg-red-400 flex flex-col justify-center items-start gap-15  font-extrabold px-10 text-6xl">
             {Array.from({ length: 4 }, (_, i) => i + 1).map((elem, index) => {
               return (
                 <React.Fragment key={index}>
                   <li
                     className="flex justify-center items-center gap-5 cursor-pointer py-2"
-                    onMouseMove={() => {
-                      nav_Link_Smoke_Animation(elem);
+                    onMouseEnter={() => {
+                      nav_Link_Circle_Animation(elem);
                     }}
                   >
                     <span className="text-xl">{elem}.</span>
@@ -248,10 +275,10 @@ const Navbar = () => {
           </div>
 
           <span
-            className="absolute w-25 h-25 bg-white/30 backdrop-blur-sm rounded-full top-1/2 flex justify-center items-center text-5xl"
-            id="Nav_Link_Shadow"
+            className="absolute w-25 h-25 bg-white/30 backdrop-blur-sm rounded-full top-1/2 flex justify-center items-center text-2xl"
+            id="Nav_Link_Circle"
           >
-            Hello!
+            {nav_Link_Circle_Text}
           </span>
         </div>
       </nav>
