@@ -3,10 +3,8 @@ import { useGSAP } from "@gsap/react";
 import { CustomEase } from "gsap/all";
 import { HiDotsHorizontal, HiOutlineMenuAlt4 } from "react-icons/hi";
 import React, { useEffect, useRef, useState } from "react";
-import nav_Images from "./assets/images/Nav-Image-1.webp";
 
 const Navbar = () => {
-  console.log(nav_Images);
   const [isNav_O_C, setIsnav_O_C] = useState(true);
 
   // const navbar = document.getElementById("Navbar");
@@ -235,7 +233,7 @@ const Navbar = () => {
               return (
                 <React.Fragment key={index}>
                   <img
-                    src={`src/assets/images/nav-image-${elem}.webp`}
+                    src={`/images/nav-image-${elem}.webp`}
                     alt={`Nav_Image_${elem}`}
                     className="w-75 object-cover object-center absolute"
                   />
