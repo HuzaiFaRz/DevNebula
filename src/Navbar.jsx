@@ -43,78 +43,24 @@ const Navbar = () => {
   //   ease: "power2.out",
   // });
 
-  // navbarTimeline.from("Navbar_Link_Circle", {
-  //   display: "none",
-  // });
-
-  // let lastIndexOFImage = 0;
-
-  // Array.from(navbarLink).forEach((elem, index) => {
-  //   elem.addEventListener("mousemove", function () {
-  //     lastIndexOFImage = index;
-  //     gsap.to(elem, {
-  //       scale: 1.1,
-  //       duration: 0.1,
-  //       ease: "power1.inOut",
-  //     });
-
-  //     navbarImage.forEach((elem, ind) => {
-  //       if (ind === lastIndexOFImage) {
-  //         gsap.to(elem, {
-  //           display: "flex",
-  //           // scale: 0,
-  //           duration: 0,
-  //           ease: "power1.inOut",
-  //         });
-  //       } else {
-  //         gsap.to(elem, {
-  //           display: "none",
-  //           // scale: 0,
-  //           duration: 0,
-  //           ease: "power1.inOut",
-  //         });
-  //       }
-  //     });
-  //   });
-
-  //   elem.addEventListener("mouseleave", function () {
-  //     lastIndexOFImage = index;
-  //     navbarImage.forEach((elem, ind) => {
-  //       if (ind === lastIndexOFImage) {
-  //         gsap.to(elem, {
-  //           display: "flex",
-  //           duration: 0,
-  //           ease: "power1.inOut",
-  //         });
-  //       } else {
-  //         gsap.to(elem, {
-  //           display: "none",
-  //           duration: 0,
-  //           ease: "power1.inOut",
-  //         });
-  //       }
-  //     });
-
-  //     gsap.to(elem, {
-  //       yPercent: 0,
-  //       x: -0,
-  //       scale: 1,
-  //       duration: 0.1,
-  //       ease: "power1.inOut",
-  //     });
-  //   });
-  // });
-
   const [nav_Link_Circle_Text, setNav_Link_Circle_Text] = useState("Hey!");
 
   const navRef = useRef();
   const { contextSafe } = useGSAP({ scope: navRef });
   const navLinkRef = useRef([]);
   const navLinkText = [
-    "BMW-Series-i7",
-    "Toyota-Supra",
     "Rolls-Royce",
     "Mercedes'S-Class",
+    "Toyota-Supra",
+    "BMW-Series-i7",
+  ];
+  const navBottomLinkText = [
+    "Home",
+    "Contact Us",
+    "About Us",
+    "FAQs",
+    "Terms & Condition",
+    "Privacy & Policy",
   ];
 
   const nav_O_C_Handler = contextSafe(() => {
@@ -176,7 +122,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const animate = contextSafe(() => {
+    const animate1 = contextSafe(() => {
       gsap.fromTo(
         "#Nav_Link_Circle",
         {
@@ -189,18 +135,91 @@ const Navbar = () => {
         },
       );
     });
-    animate();
+    animate1();
+
+    const animate2 = contextSafe(() => {
+      gsap.fromTo(
+        "#Nav_Images",
+        {
+          transform: "rotate3d(1, 2, 3, 20deg)",
+          skewY: "20deg",
+          duration: 0.3,
+          ease: "power5.inOut",
+          scale: 0.5,
+        },
+        {
+          transform: "rotate3d(1, 2, 3, 0deg)",
+          skewY: "0deg",
+          scale: 1,
+          duration: 0.3,
+          ease: "power5.inOut",
+        },
+      );
+    });
+    animate2();
   }, [nav_Link_Circle_Text]);
+
+  const nav_Images_Animation = contextSafe(() => {
+    const circle = document.querySelector("#Nav_Link_Circle");
+    const quickX = gsap.quickTo("#Nav_Images", "x", {
+      duration: 1.2,
+      ease: "expo.out",
+    });
+    const quickY = gsap.quickTo("#Nav_Images", "y", {
+      duration: 1.2,
+      ease: "expo.out",
+    });
+    const top = circle.getBoundingClientRect().top;
+    const left = circle.getBoundingClientRect().left;
+    quickX(top / 10);
+    quickY(left / 10);
+    gsap.to("#Nav_Images", {
+      y: "+=10",
+      repeat: -1,
+      yoyo: true,
+      duration: 2,
+      ease: "sine.inOut",
+    });
+  });
+
+  const Nav_Bottom_Links_Ref = useRef([]);
+
+  const nav_Bottom_Links_Animation_Start = contextSafe((ind) => {
+    const elem = Nav_Bottom_Links_Ref.current[ind];
+    gsap.to(elem.querySelector(".Nav_Bottom_Link_1"), {
+      duration: 0.4,
+      ease: "power3.out",
+      yPercent: -100,
+    });
+    gsap.to(elem.querySelector(".Nav_Bottom_Link_2"), {
+      duration: 0.4,
+      ease: "power3.out",
+      yPercent: -100,
+    });
+  });
+  const nav_Bottom_Links_Animation_Reset = contextSafe((ind) => {
+    const elem = Nav_Bottom_Links_Ref.current[ind];
+    gsap.to(elem.querySelector(".Nav_Bottom_Link_1"), {
+      duration: 0.4,
+      ease: "power3.out",
+      yPercent: 0,
+    });
+    gsap.to(elem.querySelector(".Nav_Bottom_Link_2"), {
+      duration: 0.4,
+      ease: "power3.out",
+      yPercent: 0,
+    });
+  });
 
   return (
     <>
       <nav
-        className="w-full h-full font-Florisha bg-black relative flex flex-col justify-center items-center"
+        className="w-full h-full bg-[#0D1717] relative flex flex-col justify-center items-center"
         id="Navbar"
         ref={navRef}
       >
         <div
-          className="w-full flex justify-between items-center p-2 px-4 z-100 fixed top-0 bg-blue-950 text-mist-300"
+          className="w-full flex justify-between items-center h-24 px-4 z-100 fixed top-0 border-b font-Glitten-Regular tracking-widest text-[#FDFCDC] border-dashed backdrop-blur-sm"
           id="Navbar_Top"
         >
           <h1 className="text-lg sm:text-3xl">CAR X</h1>
@@ -219,41 +238,40 @@ const Navbar = () => {
         </div>
 
         <div
-          className="bg-amber-300 w-full h-full absolute overflow-hidden"
+          className="w-full h-full absolute overflow-hidden font-Bruney"
           id="Navbar_Center"
           onMouseMove={nav_Center_Circle_Handler}
         >
           <div
-            className="absolute left-0 w-[40%] h-full bg-red-300 flex items-center justify-center"
-            onMouseEnter={() => {
-              setNav_Link_Circle_Text("Hey!");
-            }}
+            className={`absolute left-0 w-[40%] h-full flex items-center justify-center`}
           >
-            {Array.from({ length: 4 }, (_, i) => i + 1).map((elem, index) => {
+            {Array.from({ length: 5 }, (_, i) => i + 1).map((elem, index) => {
               return (
                 <React.Fragment key={index}>
                   <img
                     src={`/images/nav-image-${elem}.webp`}
                     alt={`Nav_Image_${elem}`}
-                    className="w-75 object-cover object-center absolute"
+                    className={`object-contain object-center absolute ${nav_Link_Circle_Text === "Hey!" ? `${index < 4 && "opacity-0"}` : elem === nav_Link_Circle_Text ? "w-137.5 h-162.5 opacity-100" : "w-50 h-50 opacity-0"}`}
+                    id="Nav_Images"
+                    onMouseMove={nav_Images_Animation}
                   />
                 </React.Fragment>
               );
             })}
           </div>
 
-          <div className="absolute right-0 w-[60%] h-full bg-red-400 flex flex-col justify-center items-start gap-15  font-extrabold px-10 text-6xl">
+          <div className="absolute right-0 w-[60%] h-full text-[#fdfcdc] flex flex-col justify-center items-start gap-15  font-extrabold px-10 text-6xl">
             {Array.from({ length: 4 }, (_, i) => i + 1).map((elem, index) => {
               return (
                 <React.Fragment key={index}>
                   <li
-                    className="flex justify-center items-center gap-5 cursor-pointer py-2"
+                    className="flex justify-center items-center gap-5 cursor-pointer py-2 z-1"
                     onMouseEnter={() => {
                       nav_Link_Circle_Animation(elem);
                     }}
                   >
                     <span className="text-xl">{elem}.</span>
-                    <a target="_blank">
+                    <a target="_blank" href="https://www.github.com/huzaifarz">
                       {navLinkText[index].split("").map((e, i) => {
                         return (
                           <span
@@ -273,11 +291,56 @@ const Navbar = () => {
           </div>
 
           <span
-            className="absolute w-25 h-25 bg-white/30 backdrop-blur-sm rounded-full top-1/2 flex justify-center items-center text-2xl"
+            className={`absolute w-25 h-25 rounded-full flex justify-center items-center text-2xl bg-cover bg-center overflow-hidden`}
             id="Nav_Link_Circle"
+            style={{
+              backgroundImage: `url(/images/nav-image-${nav_Link_Circle_Text}.webp)`,
+            }}
           >
-            {nav_Link_Circle_Text}
+            <span className="absolute inset-0 bg-black/50 backdrop-blur-[1px]" />
+            <span className="relative z-10 drop-shadow-lg  text-[#fdfcdc]">
+              {nav_Link_Circle_Text}
+            </span>
           </span>
+        </div>
+
+        <div
+          className="w-full h-24 absolute bottom-0 text-[#fdfcdc] border-t border-dashed flex flex-col justify-between items-center p-1 backdrop-blur-sm"
+          id="Nav_Bottom"
+        >
+          <div className="flex flex-wrap justify-center gap-7 items-center w-full font-Bruney pt-4">
+            {navBottomLinkText.map((elem, ind) => {
+              return (
+                <React.Fragment key={ind}>
+                  <a
+                    href={elem.toLocaleLowerCase().replace(/[^a-zA-Z0-9]/g, "")}
+                    className="font-extralight text-lg tracking-widest relative inline-block overflow-hidden px-5 border-r border-dashed"
+                    onMouseEnter={() => {
+                      nav_Bottom_Links_Animation_Start(ind);
+                    }}
+                    onMouseLeave={() => {
+                      nav_Bottom_Links_Animation_Reset(ind);
+                    }}
+                    ref={(el) => {
+                      Nav_Bottom_Links_Ref.current[ind] = el;
+                    }}
+                  >
+                    <span className={`block Nav_Bottom_Link_1`}>{elem}</span>
+                    <span
+                      className={`absolute left-0 top-full Nav_Bottom_Link_2`}
+                    >
+                      {elem}
+                    </span>
+                  </a>
+                </React.Fragment>
+              );
+            })}
+          </div>
+
+          <p className="self-end text-sm copyright font-mono">
+            {" "}
+            © {new Date().getFullYear()} Car X. All rights reserved.
+          </p>
         </div>
       </nav>
     </>
