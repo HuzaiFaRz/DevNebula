@@ -22,11 +22,18 @@
   --font-Bruney: Bruney;
   --font-Glitten-Bold: Glitten-Bold;
   --font-Glitten-Regular: Glitten-Regular;
+  --breakpoint-smallMobile: 500px;
+  --breakpoint-mobile: 720px;
+  --breakpoint-tablet: 830px;
+  --breakpoint-laptop: 1000px;
+  --breakpoint-desktop: 1190px;
+  --breakpoint-extraLarge: 1350px;
 }
 
-html,body{
+html,
+body {
   user-select: none !important;
-  -webkit-user-drag:none !important;
+  -webkit-user-drag: none !important;
   -moz-user-select: none !important;
   outline: none !important;
 }
