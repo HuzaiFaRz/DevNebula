@@ -1,10 +1,23 @@
-import Navbar from "./Navbar";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./Layout/Layout";
+import Home from "./Pages/Home";
+import React from "react";
+
+const routes = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [{ index: true, Component: Home }],
+  },
+]);
 
 const App = () => {
   return (
-    <div className="w-full h-dvh bg-amber-400">
-      <Navbar />
-    </div>
+    <React.Fragment>
+      <main className="w-full h-full">
+        <RouterProvider router={routes} />
+      </main>
+    </React.Fragment>
   );
 };
 
