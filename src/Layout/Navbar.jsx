@@ -237,7 +237,8 @@ const Navbar = () => {
     const header = document.querySelector("#Header");
     const headerArrow = document.querySelector("#Header_Arrow");
     const a = (event) => {
-      if (event.clientX <= header.clientWidth) {
+      let x = event?.clientX;
+      if (x <= header.clientWidth) {
         gsap.to(header, {
           left: 0,
           duration: 0.4,
