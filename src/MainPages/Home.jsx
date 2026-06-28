@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import home_Video from "/videos/homeVideo.mp4";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { Draggable } from "gsap/Draggable";
+gsap.registerPlugin(Draggable);
 const Home = () => {
   const [currentIndexImage, setCurrentIndexImage] = useState(0);
   const [whatSize, setWhatSize] = useState(false);
@@ -234,9 +236,226 @@ const Home = () => {
     event.currentTarget.children[0].style.color = start ? "#011222" : "#fdfcdc";
   };
 
+  const video_Masks = [
+    {
+      width: "35vw",
+      height: "20vw",
+      top: "15vh",
+      right: "8vw",
+    },
+
+    {
+      width: "35vw",
+      height: "20vw",
+      top: "3vh",
+      right: "15vw",
+    },
+
+    {
+      width: "35vw",
+      height: "20vw",
+      top: "15vh",
+      right: "5vw",
+    },
+
+    // {
+    //   width: "20vw",
+    //   height: "10vw",
+    //   top: "23vh",
+    //   right: "5vw",
+    // },
+
+    // {
+    //   width: "22vw",
+    //   height: "12vw",
+    //   top: "28vh",
+    //   right: "6vw",
+    // },
+
+    {
+      width: "60vw",
+      height: "35vw",
+      top: "20vh",
+      right: "10vw",
+    },
+  ];
+
+  useEffect(() => {
+    const videosContainer = document.querySelector(".videos-container");
+    const dragBoxes = document.querySelectorAll(".drag-box");
+    const allVideos = document.querySelectorAll("video");
+    if (!videosContainer || dragBoxes.length === 0 || allVideos.length === 0)
+      return;
+
+    allVideos.forEach((video) => {
+      video.playbackRate = 1.1;
+    });
+
+    dragBoxes.forEach((box, index) => {
+      const innerVideo = box.querySelector(".inner-video");
+      const dragBoxX = box.querySelector(".drag-box-X");
+      const dragBoxY = box.querySelector(".drag-box-Y");
+      const dragBoxW = box.querySelector(".drag-box-W");
+      const dragBoxH = box.querySelector(".drag-box-H");
+      const videoS = box.querySelector(".video-S");
+      const videoT = box.querySelector(".video-T");
+      const videoPrgressBar = box.querySelector(".video-Prgress-Bar");
+      const videoV = box.querySelector(".video-V");
+
+      if (!innerVideo) return;
+
+      innerVideo.addEventListener("timeupdate", (event) => {
+        const currentSeconds = innerVideo.currentTime;
+        const totalSeconds = innerVideo.duration;
+        videoT.innerHTML = `T: ${currentSeconds.toFixed(3)}(S)`;
+        if (totalSeconds > 0) {
+          const percentagePlayed = (currentSeconds / totalSeconds) * 100;
+          gsap.to(videoPrgressBar, {
+            width: `${percentagePlayed}%`,
+            duration: 0.6,
+            ease: "power2.out",
+          });
+        }
+      });
+
+      const update_Video_Position = () => {
+        let videosContainerRect = videosContainer.getBoundingClientRect();
+        let dragBoxRect = box.getBoundingClientRect();
+        let { x, y, width, height } = dragBoxRect;
+
+        dragBoxX.innerHTML = `X:${x.toFixed(2)}px`;
+        dragBoxY.innerHTML = `Y:${y.toFixed(2)}px`;
+        dragBoxW.innerHTML = `W:${width.toFixed(2)}px`;
+        dragBoxH.innerHTML = `H:${height.toFixed(2)}px`;
+
+        gsap.set(innerVideo, {
+          x: `${videosContainerRect.left - dragBoxRect.left}px`,
+          y: `${videosContainerRect.top - dragBoxRect.top}px`,
+        });
+      };
+
+      update_Video_Position();
+
+      let isDrag = false;
+      let currentX = 0,
+        currentY = 0,
+        initialLeft = 0,
+        initialTop = 0;
+
+      const setting_Positions = (e) => {
+        isDrag = true;
+        videoS.innerHTML = "active";
+        videoS.style.color = "green";
+        currentX = e.clientX;
+        currentY = e.clientY;
+        initialLeft = box.offsetLeft;
+        initialTop = box.offsetTop;
+        box.style.zIndex = 50;
+      };
+
+      const givingPostions = (event) => {
+        if (!isDrag) return;
+        const dx = event.clientX - currentX;
+        const dy = event.clientY - currentY;
+        videoV.innerHTML = `V: ${Math.sqrt(dx * dx + dy * dy).toFixed(2)}`;
+        const nextLeft = initialLeft + dx;
+        const nextTop = initialTop + dy;
+        gsap.to(box, {
+          left: `${nextLeft}px`,
+          top: `${nextTop}px`,
+          duration: 0.6,
+          ease: "power2.out",
+          onUpdate: update_Video_Position,
+        });
+      };
+
+      const removingPositions = (event) => {
+        if (isDrag) {
+          videoS.innerHTML = "unactive";
+          videoS.style.color = "#fb2c36";
+          isDrag = false;
+          box.style.zIndex = 1;
+        }
+      };
+
+      window.addEventListener("resize", update_Video_Position);
+      box.addEventListener("mousedown", setting_Positions);
+      document.addEventListener("mousemove", givingPostions);
+      document.addEventListener("mouseup", removingPositions);
+
+      box._cleanup = () => {
+        box.removeEventListener("mousedown", setting_Positions);
+        document.removeEventListener("mousemove", givingPostions);
+        document.removeEventListener("mouseup", removingPositions);
+        window.removeEventListener("resize", update_Video_Position);
+      };
+    });
+
+    return () => {
+      dragBoxes.forEach((box) => {
+        if (box._cleanup) box._cleanup();
+      });
+    };
+  }, []);
+
   return (
     <>
-      <div className="w-full h-full" ref={homeRef}>
+      <div className="overflow-hidden" ref={homeRef}>
+        <section className="w-screen h-screen overflow-hidden relative bg-black videos-container">
+          <video
+            src={home_Video}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover opacity-10 absolute inset-0 main-video"
+          ></video>
+
+          {video_Masks.map((elem, index) => {
+            const { width, height, top, right } = elem;
+            return (
+              <div
+                key={index}
+                className={`absolute overflow-hidden will-change-transform drag-box cursor-grab active:cursor-grabbing select-none backdrop-blur-sm border shadow-[inset_0_0_12px_rgba(16,185,129,0.05)] hover:border-layout hover:shadow-[0_0_20px_rgba(52,211,153,0.15),inset_0_0_15px_rgba(52,211,153,0.1)] active:border-layout active:shadow-[0_0_25px_rgba(34,211,238,0.25)] transition-all duration-300 ease-out`}
+                style={{
+                  width,
+                  height,
+                  top,
+                  right,
+                }}
+              >
+                <div className="w-full h-full absolute inset-0 text-sm text-layoutText z-50 font-mono flex flex-col justify-between items-center">
+                  <div className="w-full h-5 flex flex-wrap justify-evenly items-center bg-layout/60">
+                    <span className="drag-box-X"></span>
+                    <span className="drag-box-Y"></span>
+                    <span className="drag-box-W"></span>
+                    <span className="drag-box-H"></span>
+                  </div>
+
+                  <div className="w-full h-5 flex flex-row justify-evenly items-center bg-layout/60">
+                    <span className="video-S text-red-500">unactive</span>
+                    <span className="video-T"></span>
+                    <span className="video-V">V: 0.00</span>
+                    <div className="w-24 bg-layoutText/50 h-3">
+                      <div className="bg-black h-3 video-Prgress-Bar w-0"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <video
+                  src={home_Video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="max-w-none object-cover absolute pointer-events-none opacity-100 inner-video"
+                  style={{ width: "100vw", height: "100vh" }}
+                ></video>
+              </div>
+            );
+          })}
+        </section>
+
         <section className="w-full h-svh bg-layout relative overflow-hidden">
           <div className="w-full h-[90%] flex items-center justify-center gap-4 relative overflow-hidden">
             {home_Slider_Data.map((elem, index) => {
@@ -307,20 +526,6 @@ const Home = () => {
               );
             })}
           </div>
-        </section>
-        <section className="w-full h-svh overflow-hidden relative">
-          <video
-            src={home_Video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-          ></video>
-
-          {/* <div className="w-full h-full absolute inset-0">
-            <div className="w-[500px] h-[500px] bg-layout/40 cursor-grab"></div>
-          </div> */}
         </section>
       </div>
     </>
