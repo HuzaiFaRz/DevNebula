@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import home_Video from "/videos/homeVideo.mp4";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -6,7 +6,11 @@ import { Draggable } from "gsap/Draggable";
 gsap.registerPlugin(Draggable);
 const Home = () => {
   const [currentIndexImage, setCurrentIndexImage] = useState(0);
-  const [whatSize, setWhatSize] = useState(false);
+  const [whatSize, setWhatSize] = useState(
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 800px)").matches
+      : false,
+  );
   const homeRef = useRef(null);
   const { contextSafe } = useGSAP({ scope: homeRef });
   const home_Slider_Ref = useRef([]);
@@ -16,7 +20,6 @@ const Home = () => {
     const handleResize = () => {
       setWhatSize(window.matchMedia("(max-width: 800px)").matches);
     };
-
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -238,45 +241,31 @@ const Home = () => {
 
   const video_Masks = [
     {
-      width: "35vw",
-      height: "20vw",
-      top: "15vh",
-      right: "8vw",
+      width: "clamp(300px, 30vw, 500px)",
+      height: "250px",
+      top: "1vh",
+      right: "60vw",
     },
 
     {
-      width: "35vw",
-      height: "20vw",
-      top: "3vh",
-      right: "15vw",
+      width: "clamp(300px, 30vw, 500px)",
+      height: "250px",
+      top: "50vh",
+      right: "60vw",
     },
 
     {
-      width: "35vw",
-      height: "20vw",
-      top: "15vh",
+      width: "clamp(300px, 35vw, 400px)",
+      height: "200px",
+      top: "60vh",
       right: "5vw",
     },
 
-    // {
-    //   width: "20vw",
-    //   height: "10vw",
-    //   top: "23vh",
-    //   right: "5vw",
-    // },
-
-    // {
-    //   width: "22vw",
-    //   height: "12vw",
-    //   top: "28vh",
-    //   right: "6vw",
-    // },
-
     {
-      width: "60vw",
-      height: "35vw",
-      top: "20vh",
-      right: "10vw",
+      width: "clamp(250px, 45vw, 600px)",
+      height: "300px",
+      top: "1vh",
+      right: "5vw",
     },
   ];
 
@@ -287,9 +276,16 @@ const Home = () => {
     if (!videosContainer || dragBoxes.length === 0 || allVideos.length === 0)
       return;
 
-    allVideos.forEach((video) => {
-      video.playbackRate = 1.1;
-    });
+    if (whatSize) {
+      allVideos.forEach((video) => {
+        video.pause();
+      });
+      return;
+    } else {
+      allVideos.forEach((video) => {
+        video.play().catch(() => {});
+      });
+    }
 
     dragBoxes.forEach((box, index) => {
       const innerVideo = box.querySelector(".inner-video");
@@ -363,7 +359,7 @@ const Home = () => {
         gsap.to(box, {
           left: `${nextLeft}px`,
           top: `${nextTop}px`,
-          duration: 0.6,
+          duration: 0.3,
           ease: "power2.out",
           onUpdate: update_Video_Position,
         });
@@ -396,7 +392,7 @@ const Home = () => {
         if (box._cleanup) box._cleanup();
       });
     };
-  }, []);
+  }, [whatSize]);
 
   return (
     <>
@@ -408,52 +404,70 @@ const Home = () => {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-10 absolute inset-0 main-video"
+            className="w-full h-full object-cover opacity-50 absolute inset-0 main-video"
           ></video>
 
-          {video_Masks.map((elem, index) => {
-            const { width, height, top, right } = elem;
-            return (
-              <div
-                key={index}
-                className={`absolute overflow-hidden will-change-transform drag-box cursor-grab active:cursor-grabbing select-none backdrop-blur-sm border shadow-[inset_0_0_12px_rgba(16,185,129,0.05)] hover:border-layout hover:shadow-[0_0_20px_rgba(52,211,153,0.15),inset_0_0_15px_rgba(52,211,153,0.1)] active:border-layout active:shadow-[0_0_25px_rgba(34,211,238,0.25)] transition-all duration-300 ease-out`}
-                style={{
-                  width,
-                  height,
-                  top,
-                  right,
-                }}
-              >
-                <div className="w-full h-full absolute inset-0 text-sm text-layoutText z-50 font-mono flex flex-col justify-between items-center">
-                  <div className="w-full h-5 flex flex-wrap justify-evenly items-center bg-layout/60">
-                    <span className="drag-box-X"></span>
-                    <span className="drag-box-Y"></span>
-                    <span className="drag-box-W"></span>
-                    <span className="drag-box-H"></span>
-                  </div>
+          {!whatSize ? (
+            video_Masks.map((elem, index) => {
+              const { width, height, top, right } = elem;
+              return (
+                <div
+                  key={index}
+                  className={`absolute overflow-hidden will-change-transform w-full h-[200px] my-4 right-auto top-auto drag-box cursor-grab active:cursor-grabbing select-none backdrop-blur-sm border shadow-[inset_0_0_12px_rgba(16,185,129,0.05)] hover:border-layout hover:shadow-[0_0_20px_rgba(52,211,153,0.15),inset_0_0_15px_rgba(52,211,153,0.1)] active:border-layout active:shadow-[0_0_25px_rgba(34,211,238,0.25)] transition-all duration-300 ease-out`}
+                  style={
+                    typeof window !== undefined && window.innerWidth >= 768
+                      ? {
+                          width,
+                          height,
+                          top,
+                          right,
+                        }
+                      : {}
+                  }
+                >
+                  <div className="w-full h-full absolute inset-0 text-xs text-layoutText z-50 font-mono flex flex-col justify-between items-center">
+                    <div className="w-full py-2 flex flex-wrap justify-evenly items-center bg-layout/60">
+                      <span className="drag-box-X"></span>
+                      <span className="drag-box-Y"></span>
+                      <span className="drag-box-W"></span>
+                      <span className="drag-box-H"></span>
+                    </div>
 
-                  <div className="w-full h-5 flex flex-row justify-evenly items-center bg-layout/60">
-                    <span className="video-S text-red-500">unactive</span>
-                    <span className="video-T"></span>
-                    <span className="video-V">V: 0.00</span>
-                    <div className="w-24 bg-layoutText/50 h-3">
-                      <div className="bg-black h-3 video-Prgress-Bar w-0"></div>
+                    <div className="w-full py-2 flex flex-wrap justify-evenly items-center bg-layout/60">
+                      <span className="video-S text-red-500">unactive</span>
+                      <span className="video-T"></span>
+                      <span className="video-V">V: 0.00</span>
+                      <div className="w-full bg-layoutText/50 h-1 mt-2">
+                        <div className="bg-black h-1 video-Prgress-Bar w-0"></div>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <video
-                  src={home_Video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="max-w-none object-cover absolute pointer-events-none opacity-100 inner-video"
-                  style={{ width: "100vw", height: "100vh" }}
-                ></video>
+                  <video
+                    src={home_Video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="max-w-none object-cover absolute pointer-events-none opacity-100 inner-video"
+                    style={{ width: "100vw", height: "100vh" }}
+                  ></video>
+                </div>
+              );
+            })
+          ) : (
+            <div>
+              <div className="block md:hidden text-center px-6 py-8 font-mono border-b border-layout/20 bg-black/40 backdrop-blur-md">
+                <h2 className="text-xl font-bold text-layoutText/80 tracking-widest uppercase mb-2 animate-pulse">
+                  [SYSTEM_ACTIVE]
+                </h2>
+                <p className="text-sm text-layoutText/80 max-w-sm mx-auto leading-relaxed">
+                  Monitoring real-time video stream matrices. Tap or drag
+                  containers to explore hidden data masks and visual layers.
+                </p>
               </div>
-            );
-          })}
+            </div>
+          )}
         </section>
 
         <section className="w-full h-svh bg-layout relative overflow-hidden">

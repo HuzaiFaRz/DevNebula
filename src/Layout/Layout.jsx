@@ -1,15 +1,15 @@
-import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
-
+import LoadingPage from "../MainPages/LoadingPage";
 const Layout = () => {
   return (
-    <React.Fragment>
+    <>
+      <LoadingPage />
       <Navbar />
       <Outlet />
       <Footer />
-    </React.Fragment>
+    </>
   );
 };
 

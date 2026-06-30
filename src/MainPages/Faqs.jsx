@@ -1,29 +1,46 @@
-import React from "react";
-
 const Faqs = () => {
-  const faqs = [
+  const faqsList = [
     {
-      q: "How do I schedule a private viewing?",
-      a: "Private viewings can be requested through our concierge portal via the Contact page.",
+      q: "How are mask positions calibrated?",
+      a: "Every viewport container corresponds directly to real-time coordinate math (vw/vh parameters).",
     },
     {
-      q: "Do you offer international shipping?",
-      a: "Yes, we facilitate fully enclosed, secure global transport for all custom fleets.",
+      q: "Can the interactive grid be customized?",
+      a: "Yes, the user console permits variable scaling across active desktop terminals using drag hooks.",
+    },
+    {
+      q: "Are the vehicles source-verified?",
+      a: "Every profile cataloged targets tier-one luxury benchmarks and custom heritage builds.",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex flex-col justify-center px-8 md:px-24">
-      <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-8">
-        FAQs
-      </h1>
-      <div className="space-y-6 max-w-2xl w-full">
-        {faqs.map((item, index) => (
-          <div key={index} className="border-b border-zinc-900 pb-4">
-            <h3 className="text-lg font-normal mb-2 text-zinc-200">{item.q}</h3>
-            <p className="text-sm font-light text-zinc-400">{item.a}</p>
-          </div>
-        ))}
+    <div className="w-full min-h-screen bg-layout text-layoutText px-6 py-12 md:p-20 font-serif selection:bg-[#10b981]/30">
+      <div className="max-w-5xl mx-auto">
+        <div className="border-b border-zinc-900 pb-6 mb-10 text-left">
+          <span className="font-mono text-xs text-[#10b981] tracking-widest block mb-2">
+            [ SYSTEM QUERIES ]
+          </span>
+          <h1 className="text-2xl md:text-5xl tracking-widest font-bold  font-Bruney uppercase">
+            FAQ INDEX
+          </h1>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 text-left font-mono">
+          {faqsList.map((item, idx) => (
+            <div
+              key={idx}
+              className="p-5 bg-zinc-900/10 border border-layoutText/30 rounded-sm hover:border-layoutText/60 transition-colors"
+            >
+              <h3 className="text-xs md:text-sm text-[#10b981] mb-2 font-medium uppercase">
+                Q: {item.q}
+              </h3>
+              <p className="text-[11px] md:text-xs text-[#f5f5f0]/70 leading-relaxed font-sans border-t border-zinc-900 pt-2">
+                {item.a}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

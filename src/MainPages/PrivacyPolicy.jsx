@@ -1,21 +1,44 @@
-import React from "react";
-
 const PrivacyPolicy = () => {
+  const privacyNodes = [
+    {
+      q: "NODE 01 // SESSION PERSISTENCE",
+      a: "We track screen resolution states exclusively to retain canvas layout integrity across transformations.",
+    },
+    {
+      q: "NODE 02 // HARDWARE UTILIZATION",
+      a: "Heavy graphic workflows including web loops are processed entirely client-side to minimize remote lag.",
+    },
+    {
+      q: "NODE 03 // COORD SCRUBBING",
+      a: "All real-time tracking scripts executing touch/mouse drag handlers instantly dissolve positions upon exit.",
+    },
+  ];
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex flex-col justify-center px-8 md:px-24">
-      <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-4">
-        Privacy & Policy
-      </h1>
-      <div className="text-zinc-400 font-light text-sm max-w-2xl space-y-4">
-        <p>
-          <strong>Data Protection:</strong> We value your security. Any personal
-          or inquiry data provided to our automotive custom build program
-          remains entirely encrypted and confidential.
-        </p>
-        <p>
-          <strong>Cookies & Dynamics:</strong> We use minimal local storage
-          metrics solely to optimize UI rendering and interface preferences.
-        </p>
+    <div className="w-full min-h-screen bg-layout text-layoutText px-6 py-12 md:p-20 font-serif selection:bg-[#10b981]/30">
+      <div className="max-w-5xl mx-auto">
+        <div className="border-b border-zinc-900 pb-6 mb-10 text-left">
+          <span className="font-mono text-xs text-[#10b981] tracking-widest block mb-2">
+            [ DATA PROTECTION SCHEMA ]
+          </span>
+          <h1 className="text-2xl md:text-5xl tracking-widest font-bold font-Bruney uppercase">
+            PRIVACY POLICY
+          </h1>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 text-left font-mono">
+          {privacyNodes.map((item, idx) => (
+            <div
+              key={idx}
+              className="p-5 bg-zinc-900/10 border border-layoutText/30 rounded-sm hover:border-layoutText/60 transition-colors"
+            >
+              <h3 className="text-xs md:text-sm text-[#10b981] mb-2 font-medium uppercase">
+                {item.q}
+              </h3>
+              <p className="text-[11px] md:text-xs text-[#f5f5f0]/70 leading-relaxed font-sans border-t border-zinc-900 pt-2">
+                {item.a}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

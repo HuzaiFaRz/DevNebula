@@ -42,7 +42,6 @@ const Navbar = () => {
     "Contact Us",
     "About Us",
     "FAQs",
-    "Terms & Condition",
     "Privacy & Policy",
   ];
 
@@ -275,7 +274,9 @@ const Navbar = () => {
             </span>
           </div>
         </button>
-        <h1 className="text-lg tablet:text-3xl">CAR X</h1>
+        <h1 className="text-lg tablet:text-3xl">
+          <a href="/">CAR X</a>
+        </h1>
       </header>
 
       <span
@@ -332,7 +333,6 @@ const Navbar = () => {
             id="Navbar_Center_Right"
           >
             {navLinkText.map((elem, index) => {
-              let link = elem.replace(/[^a-zA-Z0-9]/g, "").toLocaleLowerCase();
               return (
                 <li
                   key={index}
@@ -351,8 +351,7 @@ const Navbar = () => {
                     {index + 1}.
                   </span>
                   <a
-                    href={link}
-                    target="_blank"
+                    href={elem.toLocaleLowerCase()}
                     className="text-[22px] smallMobile:text-[35px] tablet:text-[40px] laptop:text-[50px] desktop:text-6xl extraLarge:text-7xl"
                   >
                     {elem.split("").map((e, i) => {
@@ -395,12 +394,15 @@ const Navbar = () => {
           id="Nav_Bottom"
         >
           {navBottomLinkText.map((elem, index) => {
-            let link = elem.replace(/[^a-zA-Z0-9]/g, "").toLocaleLowerCase();
+            let link =
+              index === 0
+                ? "/"
+                : elem.replace(/[^a-zA-Z0-9]/g, "").toLocaleLowerCase();
+
             return (
               <a
                 key={index}
                 href={link}
-                target="_blank"
                 className="font-extralight text-xs mobile:text-sm tablet:text-lg tracking-widest relative inline-block overflow-hidden px-3 mobile:px-5 border-r border-dashed text-white"
                 onMouseEnter={() => {
                   nav_Bottom_Links_Animation(index, true);
