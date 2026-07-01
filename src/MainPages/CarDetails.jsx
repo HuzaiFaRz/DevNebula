@@ -4,6 +4,7 @@ import home_Video from "/videos/homeVideo.mp4";
 
 const CarDetails = () => {
   const { carID } = useParams();
+  const navigate = useNavigate();
 
   const [whichCar, setWhichCar] = useState(null);
 
@@ -87,7 +88,7 @@ const CarDetails = () => {
     setWhichCar(searchingCar);
     window.scrollTo(0, 0);
   }, [carID]);
-  const navigate = useNavigate();
+
   if (!whichCar) {
     navigate("/not-found", { replace: true });
     return;
