@@ -1,16 +1,30 @@
-# React + Vite
+# 🏎️ Dynamic Luxury Automotive Showcase
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-end, minimalist interactive web application designed to benchmark luxury automotive aesthetics. This project fuses cinematic video masking, high-fidelity specs dashboards, and fluid, motion-driven user interfaces.
 
-Currently, two official plugins are available:
+## ✨ Core Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Interactive Dynamic Masking:** Viewport-calibrated container blocks with custom mouse/touch drag handlers.
+- **Cinematic Motion Design:** Immersive animations powered by GSAP for a continuous, smooth storytelling layout.
+- **Fluid Scroll Integration:** Global kinetic wheel scrolling utilizing the Lenis engine for native-feeling momentum.
+- **Zero-Reload Navigation:** Clean Single Page Application (SPA) state transitions using React Router Dom.
+- **Responsive Architecture:** Scalable grid flows that clean-stack on mobile viewports to prevent GPU/hardware lag.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Core:** React.js (Vite)
+- **Styling:** Tailwind CSS (Custom Serif/Mono Layout)
+- **Motion & Animation:** GSAP (GreenSock Animation Platform)
+- **Scroll Engine:** Lenis Smooth Scroll
+- **Routing:** React Router Dom v6
 
-## Expanding the ESLint configuration
+## 🚀 Quick Setup & Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Follow these steps to get the development terminal running locally:
+
+### 1. Clone the Repository
+
+```bash
+git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+cd your-repo-name
+```

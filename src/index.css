@@ -39,6 +39,9 @@ body {
   -moz-user-select: none !important;
   outline: none !important;
 }
+html{
+  scroll-behavior: smooth !important;
+}
 
 ::-webkit-scrollbar-track {
   background: var(--color-layout);

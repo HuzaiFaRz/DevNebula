@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import home_Video from "/videos/homeVideo.mp4";
-import LoadingPage from "./LoadingPage";
 
 const CarDetails = () => {
   const { carID } = useParams();
@@ -89,9 +88,7 @@ const CarDetails = () => {
     window.scrollTo(0, 0);
   }, [carID]);
 
-  if (!whichCar) {
-    return <LoadingPage />;
-  }
+  if (!whichCar) return;
 
   const { name, tagline, desc, specs, images } = whichCar;
 
@@ -127,7 +124,7 @@ const CarDetails = () => {
 
       <div className="w-full bg-layout text-layoutText p-6 md:p-20 font-serif">
         <div className="border-b border-zinc-800 pb-6 mb-12">
-          <span className="font-mono text-xs text-[#10b981] tracking-widest">
+          <span className="font-mono text-xs text-amber-300 tracking-widest">
             [ SPECIFICATIONS MATRIX ]
           </span>
           <h2 className="text-2xl md:text-4xl tracking-widest mt-2 uppercase">

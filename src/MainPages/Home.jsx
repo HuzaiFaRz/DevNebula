@@ -3,6 +3,7 @@ import home_Video from "/videos/homeVideo.mp4";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Draggable } from "gsap/Draggable";
+
 gsap.registerPlugin(Draggable);
 const Home = () => {
   const [currentIndexImage, setCurrentIndexImage] = useState(0);
@@ -283,6 +284,7 @@ const Home = () => {
       return;
     } else {
       allVideos.forEach((video) => {
+        video.playbackRate = 0.8;
         video.play().catch(() => {});
       });
     }

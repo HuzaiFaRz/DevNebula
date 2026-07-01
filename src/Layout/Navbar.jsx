@@ -7,6 +7,7 @@ import {
   MdKeyboardDoubleArrowDown,
   MdKeyboardDoubleArrowRight,
 } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isNav_O_C, setIsnav_O_C] = useState(true);
@@ -275,7 +276,7 @@ const Navbar = () => {
           </div>
         </button>
         <h1 className="text-lg tablet:text-3xl">
-          <a href="/">CAR X</a>
+          <Link to={"/"}>CAR X</Link>
         </h1>
       </header>
 
@@ -350,8 +351,9 @@ const Navbar = () => {
                   >
                     {index + 1}.
                   </span>
-                  <a
-                    href={elem.toLocaleLowerCase()}
+                  <Link
+                    target="_blank"
+                    to={elem.toLocaleLowerCase()}
                     className="text-[22px] smallMobile:text-[35px] tablet:text-[40px] laptop:text-[50px] desktop:text-6xl extraLarge:text-7xl"
                   >
                     {elem.split("").map((e, i) => {
@@ -367,7 +369,7 @@ const Navbar = () => {
                         </span>
                       );
                     })}
-                  </a>
+                  </Link>
                 </li>
               );
             })}
@@ -400,9 +402,10 @@ const Navbar = () => {
                 : elem.replace(/[^a-zA-Z0-9]/g, "").toLocaleLowerCase();
 
             return (
-              <a
+              <Link
                 key={index}
-                href={link}
+                target="_blank"
+                to={link}
                 className="font-extralight text-xs mobile:text-sm tablet:text-lg tracking-widest relative inline-block overflow-hidden px-3 mobile:px-5 border-r border-dashed text-white"
                 onMouseEnter={() => {
                   nav_Bottom_Links_Animation(index, true);
@@ -418,7 +421,7 @@ const Navbar = () => {
                 <span className={`absolute left-0 top-full Nav_Bottom_Link_2`}>
                   {elem}
                 </span>
-              </a>
+              </Link>
             );
           })}
         </div>

@@ -3,7 +3,7 @@ const ContactUs = () => {
     <div className="w-full min-h-screen bg-layout text-layoutText px-6 py-12 md:p-20 font-serif selection:bg-[#10b981]/30">
       <div className="max-w-5xl mx-auto">
         <div className="border-b border-zinc-900 pb-6 mb-10 text-left font-Bruney">
-          <span className="font-mono text-xs text-[#10b981] tracking-widest block mb-2">
+          <span className="font-mono text-xs text-amber-300 tracking-widest block mb-2">
             [ DIRECT CHANNELS ]
           </span>
           <h1 className="text-2xl md:text-5xl tracking-widest font-bold uppercase">

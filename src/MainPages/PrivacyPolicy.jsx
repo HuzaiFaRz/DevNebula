@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
     <div className="w-full min-h-screen bg-layout text-layoutText px-6 py-12 md:p-20 font-serif selection:bg-[#10b981]/30">
       <div className="max-w-5xl mx-auto">
         <div className="border-b border-zinc-900 pb-6 mb-10 text-left">
-          <span className="font-mono text-xs text-[#10b981] tracking-widest block mb-2">
+          <span className="font-mono text-xs text-amber-300 tracking-widest block mb-2">
             [ DATA PROTECTION SCHEMA ]
           </span>
           <h1 className="text-2xl md:text-5xl tracking-widest font-bold font-Bruney uppercase">
@@ -30,10 +30,10 @@ const PrivacyPolicy = () => {
               key={idx}
               className="p-5 bg-zinc-900/10 border border-layoutText/30 rounded-sm hover:border-layoutText/60 transition-colors"
             >
-              <h3 className="text-xs md:text-sm text-[#10b981] mb-2 font-medium uppercase">
+              <h3 className="text-xs md:text-sm text-layoutText/40 mb-2 font-medium uppercase">
                 {item.q}
               </h3>
-              <p className="text-[11px] md:text-xs text-[#f5f5f0]/70 leading-relaxed font-sans border-t border-zinc-900 pt-2">
+              <p className="text-[11px] md:text-xs text-layoutText/70 leading-relaxed font-sans border-t border-zinc-900 pt-2">
                 {item.a}
               </p>
             </div>
