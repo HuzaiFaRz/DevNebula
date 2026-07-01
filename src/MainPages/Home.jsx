@@ -415,7 +415,7 @@ const Home = () => {
               return (
                 <div
                   key={index}
-                  className={`absolute overflow-hidden will-change-transform w-full h-[200px] my-4 right-auto top-auto drag-box cursor-grab active:cursor-grabbing select-none backdrop-blur-sm border shadow-[inset_0_0_12px_rgba(16,185,129,0.05)] hover:border-layout hover:shadow-[0_0_20px_rgba(52,211,153,0.15),inset_0_0_15px_rgba(52,211,153,0.1)] active:border-layout active:shadow-[0_0_25px_rgba(34,211,238,0.25)] transition-all duration-300 ease-out`}
+                  className={`absolute overflow-hidden will-change-transform w-full h-50 my-4 right-auto top-auto drag-box cursor-grab active:cursor-grabbing select-none backdrop-blur-sm border shadow-[inset_0_0_12px_rgba(16,185,129,0.05)] hover:border-layout hover:shadow-[0_0_20px_rgba(52,211,153,0.15),inset_0_0_15px_rgba(52,211,153,0.1)] active:border-layout active:shadow-[0_0_25px_rgba(34,211,238,0.25)] transition-all duration-300 ease-out`}
                   style={
                     typeof window !== undefined && window.innerWidth >= 768
                       ? {
