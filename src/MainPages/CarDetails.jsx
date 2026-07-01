@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import home_Video from "/videos/homeVideo.mp4";
 
 const CarDetails = () => {
@@ -87,8 +87,11 @@ const CarDetails = () => {
     setWhichCar(searchingCar);
     window.scrollTo(0, 0);
   }, [carID]);
-
-  if (!whichCar) return;
+  const navigate = useNavigate();
+  if (!whichCar) {
+    navigate("/not-found", { replace: true });
+    return;
+  }
 
   const { name, tagline, desc, specs, images } = whichCar;
 

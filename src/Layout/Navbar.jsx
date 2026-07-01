@@ -352,8 +352,8 @@ const Navbar = () => {
                     {index + 1}.
                   </span>
                   <Link
-                    target="_blank"
-                    to={elem.toLocaleLowerCase()}
+                    onClick={nav_O_C_Handler}
+                    to={`cars/${elem.toLocaleLowerCase()}`}
                     className="text-[22px] smallMobile:text-[35px] tablet:text-[40px] laptop:text-[50px] desktop:text-6xl extraLarge:text-7xl"
                   >
                     {elem.split("").map((e, i) => {
@@ -404,7 +404,6 @@ const Navbar = () => {
             return (
               <Link
                 key={index}
-                target="_blank"
                 to={link}
                 className="font-extralight text-xs mobile:text-sm tablet:text-lg tracking-widest relative inline-block overflow-hidden px-3 mobile:px-5 border-r border-dashed text-white"
                 onMouseEnter={() => {
@@ -413,6 +412,7 @@ const Navbar = () => {
                 onMouseLeave={() => {
                   nav_Bottom_Links_Animation(index, false);
                 }}
+                onClick={nav_O_C_Handler}
                 ref={(el) => {
                   Nav_Bottom_Links_Ref.current[index] = el;
                 }}

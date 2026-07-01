@@ -66,14 +66,15 @@ const App = () => {
 
     <Fragment>
       <Routes>
-        <Route path="/" element={<Layout />} errorElement={<ErrorRoute />}>
-          <Route path="/" element={<Home />} index />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
           <Route path="contactus" element={<ContactUs />} />
           <Route path="aboutus" element={<AboutUs />} />
           <Route path="faqs" element={<Faqs />} />
           <Route path="privacypolicy" element={<PrivacyPolicy />} />
-          <Route path=":carID" element={<CarDetails />}></Route>
+          <Route path="cars/:carID" element={<CarDetails />}></Route>
         </Route>
+        <Route path="*" element={<ErrorRoute />} />
       </Routes>
     </Fragment>
   );
