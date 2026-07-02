@@ -351,9 +351,9 @@ const Navbar = () => {
                   >
                     {index + 1}.
                   </span>
-                  <Link
+                  <a
                     onClick={nav_O_C_Handler}
-                    to={`cars/${elem.toLocaleLowerCase()}`}
+                    href={`cars/${elem.toLocaleLowerCase()}`}
                     className="text-[22px] smallMobile:text-[35px] tablet:text-[40px] laptop:text-[50px] desktop:text-6xl extraLarge:text-7xl"
                   >
                     {elem.split("").map((e, i) => {
@@ -369,7 +369,7 @@ const Navbar = () => {
                         </span>
                       );
                     })}
-                  </Link>
+                  </a>
                 </li>
               );
             })}
@@ -402,9 +402,9 @@ const Navbar = () => {
                 : elem.replace(/[^a-zA-Z0-9]/g, "").toLocaleLowerCase();
 
             return (
-              <Link
+              <a
                 key={index}
-                to={link}
+                href={link}
                 className="font-extralight text-xs mobile:text-sm tablet:text-lg tracking-widest relative inline-block overflow-hidden px-3 mobile:px-5 border-r border-dashed text-white"
                 onMouseEnter={() => {
                   nav_Bottom_Links_Animation(index, true);
@@ -421,7 +421,7 @@ const Navbar = () => {
                 <span className={`absolute left-0 top-full Nav_Bottom_Link_2`}>
                   {elem}
                 </span>
-              </Link>
+              </a>
             );
           })}
         </div>
