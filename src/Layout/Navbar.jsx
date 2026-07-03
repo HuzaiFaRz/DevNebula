@@ -353,7 +353,7 @@ const Navbar = () => {
                   </span>
                   <a
                     onClick={nav_O_C_Handler}
-                    href={`cars/${elem.toLocaleLowerCase()}`}
+                    href={`/cars/${elem.toLocaleLowerCase()}`}
                     className="text-[22px] smallMobile:text-[35px] tablet:text-[40px] laptop:text-[50px] desktop:text-6xl extraLarge:text-7xl"
                   >
                     {elem.split("").map((e, i) => {
@@ -404,7 +404,7 @@ const Navbar = () => {
             return (
               <a
                 key={index}
-                href={link}
+                href={`/${link}`}
                 className="font-extralight text-xs mobile:text-sm tablet:text-lg tracking-widest relative inline-block overflow-hidden px-3 mobile:px-5 border-r border-dashed text-white"
                 onMouseEnter={() => {
                   nav_Bottom_Links_Animation(index, true);
