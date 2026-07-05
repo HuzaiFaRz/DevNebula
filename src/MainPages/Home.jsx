@@ -277,17 +277,17 @@ const Home = () => {
     if (!videosContainer || dragBoxes.length === 0 || allVideos.length === 0)
       return;
 
-    if (whatSize) {
-      allVideos.forEach((video) => {
-        video.pause();
-      });
-      return;
-    } else {
-      allVideos.forEach((video) => {
-        video.playbackRate = 0.8;
-        video.play().catch(() => {});
-      });
-    }
+    // if (whatSize) {
+    //   allVideos.forEach((video) => {
+    //     video.pause();
+    //   });
+    //   return;
+    // } else {
+    //   allVideos.forEach((video) => {
+    //     video.playbackRate = 0.8;
+    //     video.play().catch(() => {});
+    //   });
+    // }
 
     dragBoxes.forEach((box, index) => {
       const innerVideo = box.querySelector(".inner-video");
@@ -406,7 +406,7 @@ const Home = () => {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-50 absolute inset-0 main-video"
+            className="w-full h-full object-cover opacity-20 absolute inset-0 main-video"
           ></video>
 
           {!whatSize ? (
