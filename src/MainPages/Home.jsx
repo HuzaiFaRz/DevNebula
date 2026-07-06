@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import home_Video from "/videos/5.mp4";
+import home_Video from "/videos/the.mp4";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Draggable } from "gsap/Draggable";
@@ -408,7 +408,7 @@ const Home = () => {
             muted
             playsInline
             preload="auto"
-            className="w-full h-full object-cover opacity-10 absolute inset-0 main-video"
+            className="w-full h-full object-cover opacity-30 absolute inset-0 main-video"
           ></video>
 
           {!whatSize ? (
@@ -453,12 +453,17 @@ const Home = () => {
                     loop
                     muted
                     playsInline
-                    preload="none"
-                    poster={video_Image}
-                    onMouseEnter={(e) => e.target.play()}
+                    // poster={video_Image}
+                    preload="auto"
+                    autoPlay={true}
+                    onMouseEnter={(e) => {
+                      e.target
+                        .play()
+                        .catch((err) => console.log("Playback error caught"));
+                    }}
                     onMouseLeave={(e) => {
                       e.target.pause();
-                      e.target.currentTime = 0;
+                      e.target.currentTime = 0; // Mouse hatne par reset taake freeze state na dikhe
                     }}
                     className="max-w-none object-cover absolute pointer-events-none opacity-100 inner-video"
                     style={{ width: "100vw", height: "100vh" }}

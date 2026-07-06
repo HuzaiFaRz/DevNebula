@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import home_Video from "/videos/5.mp4";
+import home_Video from "/videos/the.mp4";
 
 const CarDetails = () => {
   const { carID } = useParams();
