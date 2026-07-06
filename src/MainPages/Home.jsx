@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import home_Video from "/videos/homeVideo.mp4";
+import home_Video from "/videos/5.mp4";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Draggable } from "gsap/Draggable";
+import video_Image from "/images/video-image.png";
 
 gsap.registerPlugin(Draggable);
 const Home = () => {
@@ -406,7 +407,8 @@ const Home = () => {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-20 absolute inset-0 main-video"
+            preload="auto"
+            className="w-full h-full object-cover opacity-10 absolute inset-0 main-video"
           ></video>
 
           {!whatSize ? (
@@ -415,7 +417,7 @@ const Home = () => {
               return (
                 <div
                   key={index}
-                  className={`absolute overflow-hidden will-change-transform w-full h-50 my-4 right-auto top-auto drag-box cursor-grab active:cursor-grabbing select-none backdrop-blur-sm border shadow-[inset_0_0_12px_rgba(16,185,129,0.05)] hover:border-layout hover:shadow-[0_0_20px_rgba(52,211,153,0.15),inset_0_0_15px_rgba(52,211,153,0.1)] active:border-layout active:shadow-[0_0_25px_rgba(34,211,238,0.25)] transition-all duration-300 ease-out`}
+                  className={`absolute overflow-hidden will-change-transform w-full h-50 my-4 right-auto top-auto drag-box cursor-grab active:cursor-grabbing select-none backdrop-blur-sm border shadow-[inset_0_0_12px_rgba(16,185,129,0.05)] hover:border-layout hover:shadow-[0_0_20px_rgba(52,211,153,0.15),inset_0_0_15px_rgba(52,211,153,0.1)] active:border-layout active:shadow-[0_0_25px_rgba(34,211,238,0.25)] transition-all duration-300 ease-out transform-gpu`}
                   style={
                     typeof window !== undefined && window.innerWidth >= 768
                       ? {
@@ -451,6 +453,13 @@ const Home = () => {
                     loop
                     muted
                     playsInline
+                    preload="none"
+                    poster={video_Image}
+                    onMouseEnter={(e) => e.target.play()}
+                    onMouseLeave={(e) => {
+                      e.target.pause();
+                      e.target.currentTime = 0;
+                    }}
                     className="max-w-none object-cover absolute pointer-events-none opacity-100 inner-video"
                     style={{ width: "100vw", height: "100vh" }}
                   ></video>
