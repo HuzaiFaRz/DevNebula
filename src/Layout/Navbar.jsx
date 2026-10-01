@@ -404,7 +404,7 @@ const Navbar = () => {
             return (
               <a
                 key={index}
-                href={`/${link}`}
+                href={`/${index === 0 ? "" : link}`}
                 className="font-extralight text-xs mobile:text-sm tablet:text-lg tracking-widest relative inline-block overflow-hidden px-3 mobile:px-5 border-r border-dashed text-white"
                 onMouseEnter={() => {
                   nav_Bottom_Links_Animation(index, true);
